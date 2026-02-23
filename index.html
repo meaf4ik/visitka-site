@@ -290,6 +290,46 @@
         align-items: flex-start;
     }
 }
+
+.brand-line {
+    display: flex;
+    align-items: center; /* Выравниваем кнопку по центру высоты текста */
+    gap: 30px;
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Чтобы на очень узких экранах всё не сломалось */
+}
+
+.btn-hero-contact {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 28px;
+    background-color: var(--text-dark); /* Черная кнопка на белом фоне */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-contact:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    background-color: #333;
+}
+
+/* Фикс для мобилок, чтобы кнопка не «прилипала» */
+@media (max-width: 768px) {
+    .brand-line {
+        gap: 15px;
+    }
+    .btn-hero-contact {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -302,9 +342,10 @@
     
     <div class="hero-content">
         <div class="brand-line">
-            <h1 class="brand-name">MDKPR Studio</h1>
-            <span class="brand-owner">by Bakhtiyar</span>
-        </div>
+    <h1 class="brand-name">MDKPR STUDIO</h1>
+    <span class="brand-owner">by Bakhtiyar</span>
+<a href="https://t.me/meaf4ik" class="btn-hero-contact" target="_blank">Написать мне</a>
+</div>
         <p class="hero-description">
             Архитектура цифровых решений. Разработка интерфейсов, где чистота кода встречается с безупречной эстетикой.
         </p>
