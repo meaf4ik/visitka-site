@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>Бахтияр | Портфолио</title>
+    <style>
+        :root {
+            --bg-main: #fcfcfc;
+            --text-dark: #1a1a1a;
+            --text-muted: #666666;
+            --accent: #3d5a80;
+            --border: #e5e5e5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            cursor: default;
+        }
+
+        .container {
+            /* Увеличил ширину с 900px до 1200px, чтобы боксы стали шире */
+            max-width: 1200px; 
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* ОБНОВЛЕННЫЙ HERO БЛОК */
+        .hero {
+            margin-bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .brand-line {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .brand-owner {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .hero-description {
+            border-left: 2px solid var(--text-dark);
+            padding-left: 30px;
+            font-size: 1.15rem;
+            max-width: 550px;
+            color: var(--text-dark);
+            margin: 0 0 30px 0;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+        }
+
+        .hero-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 15px;
+        }
+
+        .separator { color: var(--border); }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 850;
+            letter-spacing: -0.04em;
+            background: linear-gradient(180deg, #1a1a1a 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ПРОЕКТЫ И СЕТКА */
+        .projects-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Две равные колонки */
+            gap: 40px;
+            justify-content: center; /* Центрирование контента внутри сетки */
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: auto; /* Высота подстраивается под контент */
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-card:nth-child(3) {
+            /* Заставляем блок занять место по центру между сетками */
+            grid-column: 1 / 3; 
+            /* Ограничиваем ширину, чтобы он был как остальные (50% минус gap) */
+            width: calc(50% - 20px); 
+            margin: 0 auto; /* Центрируем сам блок в ряду */
+        }
+	@media (max-width: 768px) {
+            .projects-list {
+                grid-template-columns: 1fr; /* На мобилках в одну колонку */
+            }
+            .project-card:nth-child(3) {
+                grid-column: auto;
+                width: 100%;
+            }
+        }
+
+        .img-box {
+            background: #f0f0f0;
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            width: 100%;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+        }
+
+        .project-info {
+            /* Добавил внутренний отступ, чтобы текст не обрезался и не лип к краям */
+            padding: 25px 20px; 
+        }
+
+        .project-info h3 {
+            font-size: 1.6rem; /* Чуть увеличил для баланса с широким боксом */
+            margin: 0 0 10px 0;
+        }
+
+        .project-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            /* Гарантируем видимость текста */
+            overflow: visible;
+        }
+
+        .project-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: zoom-out;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+/* Контейнер для заголовка и кнопки */
+.project-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.project-title-row h3 {
+    margin: 0; /* Убираем лишние отступы, чтобы кнопка была вровень */
+}
+
+/* Стили овальной кнопки */
+.btn-visit {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    border-radius: 50px; /* Овальная форма */
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-visit:hover {
+    background-color: var(--text-dark);
+    color: #fff;
+    border-color: var(--text-dark);
+    transform: scale(1.05);
+}
+
+/* Адаптив: на мобилках кнопка уйдет под заголовок, если места мало */
+@media (max-width: 480px) {
+    .project-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+   <header class="hero">
+    <div class="status-badge">
+        <span class="dot"></span> MDKPR Studio — Systems in motion
+    </div>
+    
+    <div class="hero-content">
+        <div class="brand-line">
+            <h1 class="brand-name">MDKPR Studio</h1>
+            <span class="brand-owner">by Bakhtiyar</span>
+        </div>
+        <p class="hero-description">
+            Архитектура цифровых решений. Разработка интерфейсов, где чистота кода встречается с безупречной эстетикой.
+        </p>
+        
+        <div class="hero-meta">
+            <span>Almaty, KZ</span>
+            <span class="separator">/</span>
+            <span id="local-time">00:00</span>
+        </div>
+    </div>
+</header>
+
+    <main class="projects-list">
+    <div class="project-card">
+        <div class="img-box">
+            <img src="assets/img/project1.jpg" alt="Project 1">
+        </div>
+        <div class="project-info">
+            <span class="project-tag">WEB DESIGN</span>
+            <h3>IDENTITY 2.0</h3>
+		<a href="https://meaf4ik.github.io/lending/" class="btn-visit" target="_blank">Перейти на сайт ↗</a>
+            <p>Переосмысление классической визитки. Там, где функциональность встречается с безупречной эстетикой. Полностью адаптивное решение для современного веба.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="img-box">
+            <img src="assets/img/project2.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+            <span class="project-tag">FULLSTACK FRONTEND</span>
+            <h3>MODULAR IDENTITY</h3>
+		<a href="https://meaf4ik.github.io/secondsite/" class="btn-visit" target="_blank">Перейти на сайт ↗</a>
+            <p>Модульный цифровой продукт, где дизайн не мешает функции. Интегрированы формы захвата данных через всплывающие окна и интеллектуальная смена тем оформления, обеспечивающая комфортную работу в любое время суток.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="img-box">
+            <img src="assets/img/coffee-preview.jpg" alt="Coffee Aroma">
+        </div>
+        <div class="project-info">
+            <span class="project-tag">VISUAL IDENTITY</span>
+            <h3>ESTETICA AROMA</h3>
+		<a href="https://meaf4ik.github.io/coffeesite/" class="btn-visit" target="_blank">Перейти на сайт ↗</a>
+            <p>Когда код становится продолжением вкуса. Проект демонстрирует мастерство работы с мягкими тенями, скруглениями и гармоничной сеткой. Пример того, как функциональный лендинг может выглядеть как страница из дорогого глянцевого журнала.</p>
+        </div>
+    </div>
+</main>
+
+   <footer>
+    <div class="footer-content">
+        <p>© 2026 MDKPR STUDIO</p>
+        <div class="footer-links">
+        </div>
+    </div>
+</footer>
+
+<div id="imageModal" class="modal" onclick="this.style.display='none'">
+    <img id="modalImg" src="" alt="Увеличенное изображение">
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll('.img-box img');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+
+        images.forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+                // Запрещаем скролл основной страницы, пока фото открыто
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Возвращаем скролл при закрытии
+        modal.onclick = function() {
+            this.style.display = "none";
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+function updateTime() {
+    const timeDisplay = document.getElementById("local-time");
+    const now = new Date();
+    timeDisplay.textContent = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+
+</body>
+</html>
